@@ -3,6 +3,7 @@ import dataJson from "../../data/en.1.json"
 import styled from "styled-components"
 import LeagueTableRow from "./league-table-row"
 import FlipMove from "react-flip-move"
+import RoundSelector from "../round-selector/index"
 
 const newTeam = {
   won: 0,
@@ -21,8 +22,8 @@ class LeagueTable extends Component {
     }
   }
 
-  onSliderChange = e => {
-    this.setState({ round: e.target.value })
+  onRoundChange = num => {
+    this.setState({ round: num })
   }
 
   renderRow = json => {
@@ -82,16 +83,9 @@ class LeagueTable extends Component {
   render() {
     return (
       <div>
-        <input
-          name="round-slider"
-          type="range"
-          min="1"
-          max="38"
-          step="1"
-          value={this.state.round}
-          onChange={this.onSliderChange}
-        />
+        <RoundSelector onRoundChange={this.onRoundChange} />
         <Table>
+          <TableHeader />
           <FlipMove duration={750} easing="ease-out">
             {this.renderRow(dataJson)}
           </FlipMove>
@@ -101,10 +95,29 @@ class LeagueTable extends Component {
   }
 }
 
+export default LeagueTable
+
 const Table = styled.div`
   letter-spacing: .02em;
   display: flex;
   flex-direction: column;
 `
+const TableHeader = () =>
+  <div style={{ display: "flex", flexDirection: "row-reverse" }}>
+    <Th>Pl</Th>
+    <Th>W</Th>
+    <Th>D</Th>
+    <Th>L</Th>
+    <Th>GF</Th>
+    <Th>GA</Th>
+    <Th>GD</Th>
+    <Th>Pts</Th>
+  </div>
 
-export default LeagueTable
+const Th = styled.div`
+  width: 2em;
+  padding: .5em;
+  border: solid #360037 1px;
+  border-right: 0;
+  font-weight: 400;
+`
