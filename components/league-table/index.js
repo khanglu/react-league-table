@@ -1,8 +1,9 @@
 import React, { Component } from "react"
 import dataJson from "../../data/en.1.json"
+import styled from "styled-components"
+import LeagueTableRow from "./league-table-row"
 
 const newTeam = {
-  played: 0,
   won: 0,
   drawn: 0,
   lost: 0,
@@ -38,15 +39,13 @@ class LeagueTable extends Component {
         if (!teams[team2]) {
           teams[team2] = Object.assign({}, newTeam)
         }
-        teams[team1].played += 1
-        teams[team2].played += 1
         teams[team1].goalFor += score1
         teams[team2].goalFor += score2
         teams[team1].goalAgainst += score2
         teams[team2].goalAgainst += score1
         if (score1 - score2 > 0) {
           teams[team1].won += 1
-          teams[team1].lost += 1
+          teams[team2].lost += 1
           teams[team1].point += 3
         } else if (score1 - score2 === 0) {
           teams[team1].drawn += 1
@@ -71,10 +70,10 @@ class LeagueTable extends Component {
     })
     return sortedTeams.map((team, index) =>
       <LeagueTableRow
+        {...team[1]}
         key={index}
         position={index + 1}
         name={team[0]}
-        {...team[1]}
       />
     )
   }
@@ -91,75 +90,35 @@ class LeagueTable extends Component {
           value={this.state.round}
           onChange={this.onSliderChange}
         />
-        <table>
+        <Table>
           <thead>
             <tr>
-              <th>Position</th>
-              <th>Team</th>
-              <th>Played</th>
-              <th>Won</th>
-              <th>Drawn</th>
-              <th>Lost</th>
+              <th />
+              <th />
+              <th>Pl</th>
+              <th>W</th>
+              <th>D</th>
+              <th>L</th>
               <th>GF</th>
               <th>GA</th>
               <th>GD</th>
-              <th>Point</th>
+              <th>Pts</th>
             </tr>
           </thead>
           <tbody>
             {this.renderRow(dataJson)}
           </tbody>
-        </table>
+        </Table>
       </div>
     )
   }
 }
 
-export default LeagueTable
+const Table = styled.table`
+  overflow: scroll;
+  margin: 0 -2px;
+  table-layout: fixed;
+  letter-spacing: .02em;
+`
 
-const LeagueTableRow = ({
-  position,
-  name,
-  played,
-  won,
-  drawn,
-  lost,
-  goalFor,
-  goalAgainst,
-  point
-}) => {
-  return (
-    <tr>
-      <td>
-        {position}
-      </td>
-      <td>
-        {name}
-      </td>
-      <td>
-        {played}
-      </td>
-      <td>
-        {won}
-      </td>
-      <td>
-        {drawn}
-      </td>
-      <td>
-        {lost}
-      </td>
-      <td>
-        {goalFor}
-      </td>
-      <td>
-        {goalAgainst}
-      </td>
-      <td>
-        {goalFor - goalAgainst}
-      </td>
-      <td>
-        {point}
-      </td>
-    </tr>
-  )
-}
+export default LeagueTable
