@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import dataJson from "../../data/en.1.json"
 import styled from "styled-components"
 import LeagueTableRow from "./league-table-row"
+import FlipMove from "react-flip-move"
 
 const newTeam = {
   won: 0,
@@ -71,7 +72,7 @@ class LeagueTable extends Component {
     return sortedTeams.map((team, index) =>
       <LeagueTableRow
         {...team[1]}
-        key={index}
+        key={team[0]}
         position={index + 1}
         name={team[0]}
       />
@@ -91,34 +92,19 @@ class LeagueTable extends Component {
           onChange={this.onSliderChange}
         />
         <Table>
-          <thead>
-            <tr>
-              <th />
-              <th />
-              <th>Pl</th>
-              <th>W</th>
-              <th>D</th>
-              <th>L</th>
-              <th>GF</th>
-              <th>GA</th>
-              <th>GD</th>
-              <th>Pts</th>
-            </tr>
-          </thead>
-          <tbody>
+          <FlipMove duration={750} easing="ease-out">
             {this.renderRow(dataJson)}
-          </tbody>
+          </FlipMove>
         </Table>
       </div>
     )
   }
 }
 
-const Table = styled.table`
-  overflow: scroll;
-  margin: 0 -2px;
-  table-layout: fixed;
+const Table = styled.div`
   letter-spacing: .02em;
+  display: flex;
+  flex-direction: column;
 `
 
 export default LeagueTable

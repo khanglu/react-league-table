@@ -8,6 +8,7 @@
     "next": "^2.4.6",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-flip-move": "^2.9.14",
     "styled-components": "^2.1.0"
   },
   "devDependencies": {

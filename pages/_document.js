@@ -9,7 +9,7 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <title>My page</title>
+          <title>React League Table ⚽️</title>
           {styleTags}
           <style jsx global>{`
             @font-face {

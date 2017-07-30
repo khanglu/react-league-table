@@ -25,7 +25,10 @@ export default () =>
     </TableWrapper>
   </MainWrapper>
 
-const Title = styled.h1`font-size: 2em;`
+const Title = styled.h1`
+  font-size: 2em;
+  margin: 0;
+`
 
 const TableWrapper = styled.div`
   text-align: center;
@@ -43,4 +46,5 @@ const MainWrapper = styled.div`
   font-family: PremierLeagueSans;
   font-weight: 300;
   padding: 5em 0;
+  min-height: calc(100vh - 10em);
 `
