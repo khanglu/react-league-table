@@ -5,11 +5,11 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "^2.4.6",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "react-flip-move": "^2.9.14",
-    "styled-components": "^2.1.0"
+    "next": "^5.0.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-flip-move": "^3.0.1",
+    "styled-components": "^3.2.0"
   },
   "devDependencies": {
     "babel-plugin-styled-components": "^1.1.7",
